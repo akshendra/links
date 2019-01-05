@@ -2,30 +2,139 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/export">Export</router-link>
     </div>
     <router-view/>
   </div>
 </template>
 
+<script>
+export default {
+  name: 'App',
+
+  mounted() {
+    this.$store.dispatch('loadLinks');
+  },
+}
+</script>
+
+
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
+.tags-input {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.tags-input input {
+    flex: 1;
+    background: transparent;
+    border: none;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+.tags-input input:focus {
+    outline: none;
+}
+
+.tags-input input[type="text"] {
+    color: #495057;
+}
+
+.tags-input-wrapper-default {
+    padding: .5rem .25rem;
+
+    background: #fff;
+
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    border-color: #dbdbdb;
+}
+
+/* The tag badges & the remove icon */
+.tags-input span {
+    margin-right: 0.3rem;
+}
+
+.tags-input-remove {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    overflow: hidden;
+}
+
+.tags-input-remove:before, .tags-input-remove:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    background: #5dc282;
+    
+    height: 2px;
+    margin-top: -1px;
+}
+
+.tags-input-remove:before {
+    transform: rotate(45deg);
+}
+.tags-input-remove:after {
+    transform: rotate(-45deg);
+}
+
+/* Tag badge styles */
+.tags-input-badge {
+    display: inline-block;
+    padding: 0.25em 0.4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+}
+
+.tags-input-badge-pill {
+    padding-right: 0.6em;
+    padding-left: 0.6em;
+    border-radius: 10rem;
+}
+
+.tags-input-badge-selected-default {
+    color: #212529;
+    background-color: #f0f1f2;
+}
+
+/* Typeahead - badges */
+.typeahead-badges > span {
+    cursor: pointer;
+    margin-right: 0.3rem;
+}
+
+/* Typeahead - dropdown */
+.typeahead-dropdown {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    width: 100%;
+}
+
+.typeahead-dropdown li {
+    padding: .25rem 1rem;
+    cursor: pointer;
+}
+
+/* Typeahead elements style/theme */
+.tags-input-typeahead-item-default {
+    color: #fff;
+    background-color: #343a40;
+}
+
+.tags-input-typeahead-item-highlighted-default {
+    color: #fff;
+    background-color: #007bff;
 }
 </style>
